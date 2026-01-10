@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import { Leaf, Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import Loader from '@/components/Loader';
 
@@ -11,7 +10,6 @@ const Login: React.FC = () => {
   const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const [isLoading, setIsLoading] = useState(false);
   
-  const { login, user } = useAuth();
   const navigate = useNavigate();
 
   const validateForm = (): boolean => {
@@ -39,16 +37,11 @@ const Login: React.FC = () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
-    try {
-      await login(email, password);
-      // Check if user has completed profile
-      const profileCompleted = localStorage.getItem('profileCompleted') === 'true';
-      navigate(profileCompleted ? '/dashboard' : '/profile');
-    } catch (error) {
-      setErrors({ general: 'Invalid email or password' });
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
       setIsLoading(false);
-    }
+      navigate('/dashboard');
+    }, 1000);
   };
 
   return (

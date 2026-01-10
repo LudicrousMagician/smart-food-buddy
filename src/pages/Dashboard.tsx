@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
-import { useAuth } from '@/context/AuthContext';
 import { useAnalysis, AnalysisResult } from '@/context/AnalysisContext';
 import { 
   Upload, 
@@ -52,7 +51,6 @@ const HistoryCard: React.FC<{ analysis: AnalysisResult }> = ({ analysis }) => {
 };
 
 const Dashboard: React.FC = () => {
-  const { user } = useAuth();
   const { analysisHistory } = useAnalysis();
 
   const totalAnalyses = analysisHistory.length;
@@ -72,7 +70,7 @@ const Dashboard: React.FC = () => {
           {/* Welcome Header */}
           <div className="mb-8">
             <h1 className="font-display text-3xl font-bold text-foreground mb-2">
-              Welcome back, {user?.name}! 👋
+              Welcome to SmartFoodAI! 👋
             </h1>
             <p className="text-muted-foreground">
               Here's your food analysis overview

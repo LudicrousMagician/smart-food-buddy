@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { 
@@ -15,8 +14,6 @@ import {
 } from 'lucide-react';
 
 const Index: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-
   const features = [
     {
       icon: Scan,
@@ -64,17 +61,17 @@ const Index: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                to={isAuthenticated ? '/upload' : '/register'}
+                to="/upload"
                 className="btn-primary text-lg py-4 px-8"
               >
                 Get Started Free
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link
-                to={isAuthenticated ? '/dashboard' : '/login'}
+                to="/dashboard"
                 className="btn-outline text-lg py-4 px-8"
               >
-                {isAuthenticated ? 'Go to Dashboard' : 'Sign In'}
+                Go to Dashboard
               </Link>
             </div>
           </div>
@@ -186,13 +183,13 @@ const Index: React.FC = () => {
                   Ready to Start?
                 </h3>
                 <p className="text-muted-foreground mb-6">
-                  Create your free account and analyze your first food in minutes.
+                  Start analyzing your food in minutes.
                 </p>
                 <Link
-                  to={isAuthenticated ? '/upload' : '/register'}
+                  to="/upload"
                   className="btn-primary w-full"
                 >
-                  {isAuthenticated ? 'Analyze Food Now' : 'Create Free Account'}
+                  Analyze Food Now
                 </Link>
               </div>
             </div>
