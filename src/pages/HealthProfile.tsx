@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import { useProfile, ALLERGIES, CONDITIONS, DIETARY_PREFERENCES } from '@/context/ProfileContext';
 import Layout from '@/components/Layout';
 import { Shield, Check, AlertTriangle, Salad } from 'lucide-react';
@@ -8,7 +7,6 @@ import Loader from '@/components/Loader';
 
 const HealthProfile: React.FC = () => {
   const { profile, updateProfile } = useProfile();
-  const { setProfileCompleted } = useAuth();
   const navigate = useNavigate();
   
   const [allergies, setAllergies] = useState<string[]>(profile.allergies);
@@ -44,19 +42,16 @@ const HealthProfile: React.FC = () => {
     setIsSaving(true);
     setError('');
     
-    try {
+    // Simulate API call
+    setTimeout(() => {
       updateProfile({
         allergies,
         conditions,
         dietaryPreference: dietaryPreference as 'vegetarian' | 'non-vegetarian' | 'vegan',
       });
-      setProfileCompleted();
-      navigate('/dashboard');
-    } catch (err) {
-      setError('Failed to save profile. Please try again.');
-    } finally {
       setIsSaving(false);
-    }
+      navigate('/dashboard');
+    }, 1000);
   };
 
   return (

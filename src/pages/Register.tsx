@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
 import { Leaf, Mail, Lock, Eye, EyeOff, AlertCircle, User } from 'lucide-react';
 import Loader from '@/components/Loader';
 
@@ -22,7 +21,6 @@ const Register: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);
   
-  const { register } = useAuth();
   const navigate = useNavigate();
 
   const validateForm = (): boolean => {
@@ -62,14 +60,11 @@ const Register: React.FC = () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
-    try {
-      await register(name, email, password);
-      navigate('/profile');
-    } catch (error) {
-      setErrors({ general: 'Registration failed. Please try again.' });
-    } finally {
+    // Simulate API call
+    setTimeout(() => {
       setIsLoading(false);
-    }
+      navigate('/profile');
+    }, 1000);
   };
 
   return (
